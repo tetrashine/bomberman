@@ -1,0 +1,69 @@
+<html>
+	<head>
+		<title>Bomberman</title>
+		<style type="text/css">  
+			#game {  
+				width: 	1248px;
+				border: 1px solid #aaa; 
+				float:	left;
+			}  
+			#info {
+				float:	left;
+				padding-left: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="game">
+			<canvas id="canvas" width="1248" height="608" style="position: absolute; left: 0; top: 0; z-index: 1;">
+				<p>Your browser does not support the canvas element.</p>
+			</canvas>
+			<canvas id="background" width="1248" height="608" style="position: absolute; left: 0; top: 0; z-index: 0;">
+			</canvas>
+		</div>
+		<div id="info">
+				Name: 	<input type="text" id="name" value="" maxlength="10" />
+						<input type="button" id="change" value="Change" />
+		</div>
+		
+		<script src="/namespace/namespace.js"></script>
+		
+		<script src="/library/json/json.js"></script> <!-- for ie -->
+		<script src="/library/socket.io/socket.io.js"></script>
+		<script src="/library/raphael/raphael.js"></script>
+		
+		<script src="/base/socket.js"></script>
+		<script src="/base/UI.js"></script>
+		
+		<script src="/application/core.js"></script>
+		<script src="/application/animator.js"></script>
+		
+		<script src="/server/serverEngine.js"></script>
+		
+		<script src="/bomberman/common/direction.js"></script>		
+		
+		<script src="/bomberman/map.js"></script>
+		<script src="/bomberman/engine.js"></script>
+		<script src="/bomberman/imageManager.js"></script>
+		<script src="/bomberman/audioManager.js"></script>
+		<script src="/bomberman/gameBoard.js"></script>
+		
+		<script src="/bomberman/data/coordinates.js"></script>
+		<script src="/bomberman/data/playerScore.js"></script>
+		<script src="/bomberman/data/bombInterface.js"></script>
+		<script src="/bomberman/data/bombermanInterface.js"></script>
+		
+		<script src="/bomberman/gameObjects/type.js"></script>
+		<script src="/bomberman/gameObjects/gameBoardTile.js"></script>
+		<script src="/bomberman/gameObjects/bomb.js"></script>
+		<script src="/bomberman/gameObjects/explosion.js"></script>
+		<script src="/bomberman/gameObjects/bombermanPlayer.js"></script>
+		<script src="/bomberman/gameObjects/gameObject.js"></script>
+		<script src="/bomberman/gameObjects/visualGameObject.js"></script>
+		<script src="/bomberman/gameObjects/animatedGameObject.js"></script>
+		<script src="/bomberman/gameObjects/multipleAnimatedGameObject.js"></script>
+		<script>
+			var core = new Application.Core();
+		</script>
+	</body>
+</html>
