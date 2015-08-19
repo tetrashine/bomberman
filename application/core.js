@@ -10,12 +10,15 @@ Application.Core = function () {
 	var engine,
 		playerId,
 		that = {},
-		socket = new Socket(that, 8080);
+		//socket = new Socket(that, 8080);
+		socket = io('http://192.168.1.121:8080');
+
+	Server.MessageCode = Server.ServerEngine;
 	
 	//******************************************************************************
 	//	This is a public function for message from the server
 	//******************************************************************************
-	that.onMessage = function (msg) {
+	socket.on('message', function (msg) {
 	
 		if(msg.code === Server.MessageCode.Initial) {
 		
@@ -64,7 +67,7 @@ Application.Core = function () {
 			engine.updatePlayerPosition(msg.id, JSON.parse(msg.coordinates));
 		}
 		
-	};
+	});
 	
 	//******************************************************************************
 	//	This is a public function for disconnecting from the game
@@ -77,9 +80,11 @@ Application.Core = function () {
 		UI.writeDebugMessage("Disconnected from server.");
 	};
 	
-	socket.subscribeEvent("message", that.onMessage);
+	/*socket.subscribeEvent("message", that.onMessage);
 	socket.subscribeEvent("disconnect", that.onDisconnect);
-	socket.connect();
+	socket.connect();*/
+	//socket.on("message", that.onMessage);
+	//socket.on("disconnect", that.onDisconnect);
 	
 	//******************************************************************************
 	//	This function sends a message to the server through websocket.
@@ -119,7 +124,7 @@ Application.Core = function () {
 			msg = {id: playerId, code: code, coordinates: JSON.stringify(coordinates)};
 		}
 		
-		socket.send(msg);
+		socket.emit('message', msg);
 	}
 	
 	//******************************************************************************

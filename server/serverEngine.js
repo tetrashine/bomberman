@@ -23,7 +23,7 @@ Server.ServerEngine = (function () {
 		Disconnect			: 4,		// Player disconnected
 		UpdatePlayer		: 5,		// Updating of all player information
 		UpdatePosition		: 6,		// Updating of coordinates and name information
-		NewPlayer			: 7			// A new player has connected to the server
+		NewPlayer			: 20		// A new player has connected to the server
 	};
 }());
 

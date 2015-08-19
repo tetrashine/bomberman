@@ -7,7 +7,7 @@ console.log(__dirname);
 var   http = require('http'), 
 		url = require('url'),
 		 fs = require('fs'),
-		 io = require('../../'),
+		 io = require('socket.io'),
 		sys = require('sys');
 
 // variables
@@ -83,12 +83,13 @@ server = http.createServer(function(req, res){
 
 server.listen(8080);
 
-var socket = io.listen(server),
-    buffer = [];
+	var socket = io.listen(server);
+	//var socket = new io(8080);
+	var buffer = [];
 	
 socket.on('connection', function (client) {
 	
-	if(Server.ServerEngine.numOfPlayers < Server.ServerEngine.MaxNumberOfPlayers) {
+	if (Server.ServerEngine.numOfPlayers < Server.ServerEngine.MaxNumberOfPlayers) {
 		
 		// If there is a list of disconnected ppl, we get from the list.
 		// If not we just increment the numOfPlayers and use that
@@ -105,7 +106,7 @@ socket.on('connection', function (client) {
 		}
 		
 		// send the initial state of other players
-		client.send({id:  playerId, code: Server.ServerEngine.Initial, players: JSON.stringify(Server.ServerEngine.players)});
+		client.emit('message', {id: playerId, code: Server.ServerEngine.Initial, players: JSON.stringify(Server.ServerEngine.players)});
 		
 		bomberman = new Bomberman.Data.BombermanInterface();
 		bomberman.playerId = playerId;
@@ -118,7 +119,7 @@ socket.on('connection', function (client) {
 		if(Server.ServerEngine.numOfPlayers == 0) { return; }
 	
 		// Tell everyone else about the message
-		client.broadcast(msg);
+		client.broadcast.emit('message', msg);
 		
 		if( msg.code === Server.ServerEngine.UpdatePlayer ) {
 			var position = getPlayerThruId(msg.id),
@@ -150,9 +151,11 @@ socket.on('connection', function (client) {
 		Server.ServerEngine.players.splice(position, 1);
 		Server.ServerEngine.clients.splice(position, 1);
 		
-		Server.ServerEngine.numOfPlayers--;
-		
-		client.broadcast({ code: Server.ServerEngine.Disconnect, id: playerId });
+		//Server.ServerEngine.numOfPlayers--;
+
+		if (--Server.ServerEngine.numOfPlayers > 0) {
+			client.broadcast.emit('message', { code: Server.ServerEngine.Disconnect, id: playerId });
+		}
 	});
 });
 

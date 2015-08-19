@@ -8,7 +8,7 @@ Namespace.register("Bomberman");
 Bomberman.AudioManager = (function () {
 	var audio = [];
 	
-	audio[0] = new Audio("/audio/bomb.mp3");
+	//audio[0] = new Audio("/audio/bomb.mp3");
 	
 	return {
 		// Items Index
