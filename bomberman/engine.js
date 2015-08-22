@@ -39,12 +39,29 @@ Bomberman.Engine = function (id, engineInterface) {
 		
 		return position;
 	}
+
+	//******************************************************************************
+	//	This function runs through the entire list of the 
+	//	players and return the player.
+	//******************************************************************************
+	function findPlayerById (playerId) {
+		var position = 0,
+			length = players.length;
+			
+		for (; position < length; position++ ) {
+			if( players[position].playerId === playerId ) {
+				return players[position];
+			}
+		}
+		
+		return null;
+	}
 	
 	//******************************************************************************
 	//	This function checks whether the current player is moving
 	//******************************************************************************
 	function isPlayerMoving () {
-		var player = players[findPlayerPositionById(playerId)];
+		var player = findPlayerById(playerId);
 		
 		return (player.up || player.down || player.left || player.right);
 	}
@@ -102,7 +119,7 @@ Bomberman.Engine = function (id, engineInterface) {
 		moveChars(dt);	// in secs
 		
 		if((gameIntervalCounter % 2 === 0) && isPlayerMoving()) {
-			core.sendPosMsg(players[findPlayerPositionById(playerId)]);
+			core.sendPosMsg(findPlayerById(playerId));
 		}
 		
 		// Add timing
@@ -935,7 +952,7 @@ Bomberman.Engine = function (id, engineInterface) {
 		//	This function gets the player by its id
 		//******************************************************************************
 		getPlayer : function (playerId) {
-			return players[findPlayerPositionById(playerId)];
+			return findPlayerById(playerId);
 		},
 		
 		//******************************************************************************
@@ -997,7 +1014,10 @@ Bomberman.Engine = function (id, engineInterface) {
 		//	This function performs name changing for the player
 		//******************************************************************************
 		changeName : function (newName) {
-			players[playerId].name = newName;
+			var player = findPlayerById(playerId);
+			if (player) {
+				player.name = newName;
+			}
 		}
 	};
 }
