@@ -64,10 +64,16 @@ Application.Core = function () {
 		} else if(msg.code === Server.MessageCode.UpdatePlayer) {	
 			engine.updatePlayer(msg.id, JSON.parse(msg.bomberman));
 		} else if(msg.code === Server.MessageCode.UpdatePosition) {	
-			engine.updatePlayerPosition(msg.id, JSON.parse(msg.coordinates));
+			engine.updatePlayerPosition(msg.id, JSON.parse(msg.cd));
 		}
 		
 	});
+
+	socket.on('chat', function (msg) {
+		console.log(msg);
+	});
+
+	//$("#send")
 	
 	//******************************************************************************
 	//	This is a public function for disconnecting from the game
@@ -121,7 +127,7 @@ Application.Core = function () {
 			// Send message of updating player's coordinates and name
 			coordinates = new Bomberman.Data.Coordinates(object);
 			
-			msg = {id: playerId, code: code, coordinates: JSON.stringify(coordinates)};
+			msg = {id: playerId, code: code, cd: JSON.stringify(coordinates)};
 		}
 		
 		socket.emit('message', msg);

@@ -128,7 +128,7 @@ socket.on('connection', function (client) {
 			Server.ServerEngine.players[position].update(bombermanInterface);
 		} else if( msg.code === Server.ServerEngine.UpdatePosition ) {	
 			var position = getPlayerThruId(msg.id),
-				coordinates = JSON.parse(msg.coordinates);
+				coordinates = JSON.parse(msg.cd);
 
 			Server.ServerEngine.players[position].updateCoordinates(coordinates);	
 		} else if( msg.code === Server.ServerEngine.Died ) {
@@ -156,6 +156,10 @@ socket.on('connection', function (client) {
 		if (--Server.ServerEngine.numOfPlayers > 0) {
 			client.broadcast.emit('message', { code: Server.ServerEngine.Disconnect, id: playerId });
 		}
+	});
+
+	client.on('chat', function(msg) {
+		client.broadcast.emit('chat', msg);
 	});
 });
 

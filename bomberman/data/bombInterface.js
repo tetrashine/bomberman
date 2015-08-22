@@ -7,6 +7,11 @@ Namespace.register("Bomberman.Data");
  *	additional information is added to support future
  *	skills of bomberman if available.
  *******************************************************/
+
+function toBit(booleanVar) {
+	return booleanVar ? 1 : 0;
+}
+
 Bomberman.Data.BombInterface = function (bomb) {
 
 	var that					= {};
@@ -17,17 +22,17 @@ Bomberman.Data.BombInterface = function (bomb) {
 		
 		// Bomb details
 		that.id					= bomb.playerId;
-		that.str				= bomb.str;
+		that.s					= bomb.str;
 		
-		that.timing				= bomb.timing;
-		that.explodeDuration	= bomb.explodeDuration;
-		that.detonateTime		= bomb.detonateTime;
+		that.t					= bomb.timing;
+		that.eD	 				= bomb.explodeDuration;
+		that.dT					= bomb.detonateTime;
 		
 		// Game Board
-		that.isWalkable			= bomb.isWalkable;
-		that.canBePlanted		= bomb.canBePlanted;
-		that.canBeExploded		= bomb.canBeExploded;
-		that.canBeExplodedThru	= bomb.canBeExplodedThru;
+		/*that.iW				= bomb.isWalkable;
+		that.cBP				= bomb.canBePlanted;
+		that.cBE				= bomb.canBeExploded;
+		that.cBET				= bomb.canBeExplodedThru;*/
 		
 	return that;
 }

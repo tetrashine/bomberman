@@ -101,32 +101,32 @@ Bomberman.GameObjects.BombermanPlayer = function (id, image) {
 		that.y					= bombermanInterface.y;
 
 		// Statistics
-		that.kills				= bombermanInterface.kills;
-		that.deaths				= bombermanInterface.deaths;
+		that.kills				= bombermanInterface.ks;
+		that.deaths				= bombermanInterface.ds;
 		
 		// Game Object
-		that.height				= bombermanInterface.height;
-		that.width				= bombermanInterface.width;
+		that.height				= bombermanInterface.h;
+		that.width				= bombermanInterface.w;
 		
 		// Movement related
-		that.speed				= bombermanInterface.speed;
-		that.up					= bombermanInterface.up;
-		that.down				= bombermanInterface.down;
-		that.left				= bombermanInterface.left;
-		that.right				= bombermanInterface.right;
+		that.speed				= bombermanInterface.s;
+		that.up					= bombermanInterface.u;
+		that.down				= bombermanInterface.d;
+		that.left				= bombermanInterface.l;
+		that.right				= bombermanInterface.r;
 		
 		// Bomb related
-		that.bombStr			= bombermanInterface.bombStr;
-		that.bombs				= bombermanInterface.bombs;
-		that.bombsMax			= bombermanInterface.bombsMax;
-		that.detonateTime		= bombermanInterface.detonateTime;
-		that.explodeDuration	= bombermanInterface.explodeDuration;
+		that.bombStr			= bombermanInterface.bS;
+		that.bombs				= bombermanInterface.b;
+		that.bombsMax			= bombermanInterface.bM;
+		that.detonateTime		= bombermanInterface.dT;
+		that.explodeDuration	= bombermanInterface.eD;
 		
 		// Game Board related
-		that.isWalkable			= bombermanInterface.isWalkable;
-		that.canBePlanted		= bombermanInterface.canBePlanted;
-		that.canBeExploded		= bombermanInterface.canBeExploded;
-		that.canBeExplodedThru	= bombermanInterface.canBeExplodedThru;
+		that.isWalkable			= bombermanInterface.iW;
+		that.canBePlanted		= bombermanInterface.cBP;
+		that.canBeExploded		= bombermanInterface.cBE;
+		that.canBeExplodedThru	= bombermanInterface.cBET;
 	};
 	
 	//******************************************************************************
@@ -134,16 +134,16 @@ Bomberman.GameObjects.BombermanPlayer = function (id, image) {
 	//	performed when the player move or has performed a change in name.
 	//******************************************************************************
 	that.updateCoordinates = function (coordinates) {
-		that.name		= coordinates.name;
+		that.name		= coordinates.n;
 		
 		that.x			= coordinates.x;
 		that.y			= coordinates.y;
 		
 		// Movement related
-		that.up			= coordinates.up;
-		that.down		= coordinates.down;
-		that.left		= coordinates.left;
-		that.right		= coordinates.right;
+		that.up			= coordinates.u == 1;
+		that.down		= coordinates.d == 1;
+		that.left		= coordinates.l == 1;
+		that.right		= coordinates.r == 1;
 	};
 	
 	return that;

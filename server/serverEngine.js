@@ -14,7 +14,7 @@ Server.ServerEngine = (function () {
 
 	return {
 		numOfPlayers		: 0,
-		MaxNumberOfPlayers	: 5,
+		MaxNumberOfPlayers	: 20,
 		players				: [],
 		clients				: [],
 		Initial				: 1,		// Done
@@ -23,7 +23,7 @@ Server.ServerEngine = (function () {
 		Disconnect			: 4,		// Player disconnected
 		UpdatePlayer		: 5,		// Updating of all player information
 		UpdatePosition		: 6,		// Updating of coordinates and name information
-		NewPlayer			: 20		// A new player has connected to the server
+		NewPlayer			: 7			// A new player has connected to the server
 	};
 }());
 

@@ -865,9 +865,9 @@ Bomberman.Engine = function (id, engineInterface) {
 									players[position], 
 									coordToPoint(bombInterface.x),
 									coordToPoint(bombInterface.y),
-									bombInterface.str, 
-									bombInterface.detonateTime, 
-									bombInterface.explodeDuration);
+									bombInterface.s, 
+									bombInterface.dT, 
+									bombInterface.eD);
 			}
 			
 			return bomb;

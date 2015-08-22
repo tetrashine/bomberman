@@ -12,22 +12,27 @@ if(typeof window === 'undefined') {
  *	players to update them regarding the other players
  *	in game. This is sent only when a player is moving.
  *******************************************************/
+
+function toBit(booleanVar) {
+	return booleanVar ? 1 : 0;
+}
+
 Bomberman.Data.Coordinates = function (bomberman) {
 
 	var that				= {};
 	
-	that.name				= bomberman.name;
+	that.n					= bomberman.name;
 	
 	// Coordinates
 	that.x					= bomberman.x;
 	that.y					= bomberman.y;
 	
 	// Movement related
-	that.up					= bomberman.up;
-	that.down				= bomberman.down;
-	that.left				= bomberman.left;
-	that.right				= bomberman.right;
-	
+	that.u					= toBit(bomberman.up);
+	that.d					= toBit(bomberman.down);
+	that.l					= toBit(bomberman.left);
+	that.r					= toBit(bomberman.right);
+
 	return that;
 }
 

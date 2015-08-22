@@ -11,6 +11,11 @@
 				float:	left;
 				padding-left: 10px;
 			}
+			#chatbox {
+				margin: 150px 0 0 0;
+				height:300px;
+				border: solid 1px;
+			}
 		</style>
 	</head>
 	<body>
@@ -24,6 +29,9 @@
 		<div id="info">
 				Name: 	<input type="text" id="name" value="" maxlength="10" />
 						<input type="button" id="change" value="Change" />
+
+			<div id="chatbox"></div>
+			<input type="text" id="chatMsg" value="" maxlength="500" /><input type="button" id="send" value="Send" />
 		</div>
 		
 		<script src="/namespace/namespace.js"></script>
