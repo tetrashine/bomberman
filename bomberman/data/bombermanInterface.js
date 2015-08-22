@@ -100,7 +100,6 @@ Bomberman.Data.BombermanInterface = function (bomberman) {
 	//	This function updates the coordinates of this bombermanInterface
 	//******************************************************************************
 	that.updateCoordinates = function (coordinates) {
-		that.name		= coordinates.n;
 		
 		that.x			= coordinates.x;
 		that.y			= coordinates.y;

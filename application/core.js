@@ -19,8 +19,59 @@ Application.Core = function () {
 	//	This is a public function for message from the server
 	//******************************************************************************
 	socket.on('message', function (msg) {
+
+		switch (msg.code) {
+			case Server.MessageCode.Initial:
+				var i,
+					players = JSON.parse(msg.players),
+					length = players.length;
+				
+				playerId = msg.id;
+				
+				// Start game
+				that.start(playerId);
+				
+				// Add opponent
+				for(i = 0; i < length; i++) {
+					engine.addPlayer(players[i].playerId, false, players[i]);
+				}
+				
+				// Add yourself
+				engine.addPlayer(playerId, true);
+				
+				// Send to server to be broadcast
+				sendMsg(Server.MessageCode.NewPlayer, engine.getPlayer(playerId));
+				
+				sendMsg(Server.MessageCode.UpdatePlayer, engine.getPlayer(playerId));
+				
+				// Display to screen
+				var input = document.getElementById("name");
+				input.value = "Player " + playerId;
+				
+				var change = document.getElementById("change");
+				change.onclick = changeName;
+				break;
+			case Server.MessageCode.NewPlayer:
+				engine.addPlayer(msg.id, false, msg.x, msg.y);
+				break;
+			case Server.MessageCode.Plant:
+				engine.plantBomb(msg.id, JSON.parse(msg.bomb));
+				break;
+			case Server.MessageCode.Died:
+				engine.playerDied(msg.killerId, msg.id, msg.x, msg.y);
+				break;
+			case Server.MessageCode.Disconnect:
+				engine.removePlayer(msg.id);
+				break;
+			case Server.MessageCode.UpdatePlayer:
+				engine.updatePlayer(msg.id, JSON.parse(msg.bomberman));
+				break;
+			case Server.MessageCode.UpdatePosition:
+				engine.updatePlayerPosition(msg.id, JSON.parse(msg.cd));
+				break;
+		}
 	
-		if(msg.code === Server.MessageCode.Initial) {
+		/*if(msg.code === Server.MessageCode.Initial) {
 		
 			var i,
 				players = JSON.parse(msg.players),
@@ -66,7 +117,7 @@ Application.Core = function () {
 		} else if(msg.code === Server.MessageCode.UpdatePosition) {	
 			engine.updatePlayerPosition(msg.id, JSON.parse(msg.cd));
 		}
-		
+		*/
 	});
 
 	socket.on('chat', function (msg) {
@@ -176,7 +227,7 @@ Application.Core = function () {
 		
 		engine.changeName(input.value.substring(0, 10));
 		
-		sendMsg(Server.MessageCode.UpdatePosition, engine.getPlayer(playerId));
+		sendMsg(Server.MessageCode.UpdatePlayer, engine.getPlayer(playerId));
 	}
 	
 	window.onblur = function (event) {

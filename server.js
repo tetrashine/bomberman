@@ -110,6 +110,7 @@ socket.on('connection', function (client) {
 		
 		bomberman = new Bomberman.Data.BombermanInterface();
 		bomberman.playerId = playerId;
+		bomberman.name = "Player " + playerId;
 		
 		Server.ServerEngine.players.push(bomberman);
 		Server.ServerEngine.clients.push(client);
@@ -150,8 +151,6 @@ socket.on('connection', function (client) {
 		
 		Server.ServerEngine.players.splice(position, 1);
 		Server.ServerEngine.clients.splice(position, 1);
-		
-		//Server.ServerEngine.numOfPlayers--;
 
 		if (--Server.ServerEngine.numOfPlayers > 0) {
 			client.broadcast.emit('message', { code: Server.ServerEngine.Disconnect, id: playerId });

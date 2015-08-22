@@ -134,7 +134,6 @@ Bomberman.GameObjects.BombermanPlayer = function (id, image) {
 	//	performed when the player move or has performed a change in name.
 	//******************************************************************************
 	that.updateCoordinates = function (coordinates) {
-		that.name		= coordinates.n;
 		
 		that.x			= coordinates.x;
 		that.y			= coordinates.y;

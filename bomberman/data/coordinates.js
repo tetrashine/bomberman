@@ -21,8 +21,6 @@ Bomberman.Data.Coordinates = function (bomberman) {
 
 	var that				= {};
 	
-	that.n					= bomberman.name;
-	
 	// Coordinates
 	that.x					= bomberman.x;
 	that.y					= bomberman.y;
