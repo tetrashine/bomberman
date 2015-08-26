@@ -959,13 +959,13 @@ Bomberman.Engine = function (id, engineInterface) {
 		//	This function updates the player from engine
 		//******************************************************************************
 		updatePlayer : function (playerId, bombermanInterface) {
-			if( !gameStarted ) { return; }
+			if (!gameStarted) { return; }
 			
-			var position = findPlayerPositionById(playerId);
+			var player = findPlayerById(playerId);
 			
-			if( position >= 0 && position < players.length ) {
+			if (player) {
 				// Update
-				players[position].update(bombermanInterface);
+				player.update(bombermanInterface);
 			}
 		},
 		
@@ -975,11 +975,11 @@ Bomberman.Engine = function (id, engineInterface) {
 		updatePlayerPosition : function (playerId, coordinates) {
 			if( !gameStarted ) { return; }
 			
-			var position = findPlayerPositionById(playerId);
+			var player = findPlayerById(playerId);
 			
-			if( position >= 0 && position < players.length ) {
+			if (player) {
 				// Update
-				players[position].updateCoordinates(coordinates);
+				player.updateCoordinates(coordinates);
 			}
 		},
 		

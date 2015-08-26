@@ -158,7 +158,7 @@ socket.on('connection', function (client) {
 	});
 
 	client.on('chat', function(msg) {
-		client.broadcast.emit('chat', msg);
+		socket.emit('chat', msg);
 	});
 });
 

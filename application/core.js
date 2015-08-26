@@ -121,10 +121,15 @@ Application.Core = function () {
 	});
 
 	socket.on('chat', function (msg) {
-		console.log(msg);
+		var text = $("<div>" + msg + "</div>");
+		$("#chatbox").append(text);
 	});
 
-	//$("#send")
+	$("#send").on("click", function () {
+		var text = engine.getPlayer(playerId).name + ": " + $("#chatMsg").val();
+		$("#chatMsg").val("");
+		socket.emit('chat', text);
+	});
 	
 	//******************************************************************************
 	//	This is a public function for disconnecting from the game

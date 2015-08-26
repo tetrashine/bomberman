@@ -9,7 +9,7 @@ var UI = (function () {
 		BombRad		= 10,
 		canvas		= document.getElementById("canvas").getContext("2d"),
 		background	= document.getElementById("background").getContext("2d"),
-		scoreBoard 	= Raphael(MapWidth, 30, 400, MapHeight),
+		scoreBoard 	= Raphael(MapWidth, 30, 400, MapHeight-200),
 		alt 		= 0,
 		blinkTiming = 14,
 		clearStroke = {'stroke-opacity': 0},
@@ -136,7 +136,7 @@ var UI = (function () {
 			text.attr({"font-size": 20});
 			
 			for( i = 0; i < length; i++ ) {
-				text = scoreBoard.text(120, 45+i*20, scores[i].name + " : " + scores[i].kills + " kills......." + scores[i].deaths + " deaths");
+				text = scoreBoard.text(120, 45+i*20, scores[i].name + " : " + scores[i].kills + " kills,  " + scores[i].deaths + " deaths");
 				text.attr({"font-size": 15});
 			}
 		},
